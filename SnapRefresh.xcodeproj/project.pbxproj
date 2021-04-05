@@ -13,6 +13,7 @@
 		7D905680261B09C40019565F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D90567E261B09C40019565F /* Main.storyboard */; };
 		7D905682261B09C50019565F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7D905681261B09C50019565F /* Assets.xcassets */; };
 		7D905685261B09C50019565F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 7D905683261B09C50019565F /* LaunchScreen.storyboard */; };
+		7D90568E261B0BF20019565F /* SnapRefreshController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7D90568D261B0BF20019565F /* SnapRefreshController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		7D905681261B09C50019565F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		7D905684261B09C50019565F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		7D905686261B09C50019565F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		7D90568D261B0BF20019565F /* SnapRefreshController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SnapRefreshController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -63,6 +65,7 @@
 				7D905681261B09C50019565F /* Assets.xcassets */,
 				7D905683261B09C50019565F /* LaunchScreen.storyboard */,
 				7D905686261B09C50019565F /* Info.plist */,
+				7D90568D261B0BF20019565F /* SnapRefreshController.swift */,
 			);
 			path = SnapRefresh;
 			sourceTree = "<group>";
@@ -140,6 +143,7 @@
 				7D90567D261B09C40019565F /* ViewController.swift in Sources */,
 				7D905679261B09C40019565F /* AppDelegate.swift in Sources */,
 				7D90567B261B09C40019565F /* SceneDelegate.swift in Sources */,
+				7D90568E261B0BF20019565F /* SnapRefreshController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
