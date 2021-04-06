@@ -9,7 +9,7 @@ import UIKit
 
 class SnapRefreshController: UIViewController {
     
-    fileprivate let startingHeight: CGFloat = 50.0
+    fileprivate let startingHeight: CGFloat = 90.0
     fileprivate let maxDragHeight: CGFloat = 150.0
     fileprivate let shapeLayer: CAShapeLayer = CAShapeLayer()
     fileprivate let leftThree = UIView()
@@ -29,6 +29,33 @@ class SnapRefreshController: UIViewController {
         rightTwo,
         rightThree
     ]
+    
+    fileprivate func generatePath() {
+        let screenWidth = UIScreen.main.bounds.width
+        
+        let leftThreeCenter = leftThree.center
+        let leftTwoCenter = leftTwo.center
+        let leftOneCenter = leftOne.center
+        let centerZeroCenter = centerZero.center
+        let rightOneCenter = rightOne.center
+        let rightTwoCenter = rightTwo.center
+        let rightThreeCenter = rightThree.center
+        
+        let bezierPath = UIBezierPath()
+        
+        bezierPath.move(to: CGPoint(x: 0, y: 0))
+        bezierPath.addLine(to: CGPoint(x: 0, y: leftThreeCenter.y))
+        
+        bezierPath.addCurve(to: leftOneCenter, controlPoint1: leftThreeCenter, controlPoint2: leftTwoCenter)
+        bezierPath.addCurve(to: rightOneCenter, controlPoint1: centerZeroCenter, controlPoint2: rightOneCenter)
+        bezierPath.addCurve(to: rightThreeCenter, controlPoint1: rightOneCenter, controlPoint2: rightTwoCenter)
+
+        
+        bezierPath.addLine(to: CGPoint(x: screenWidth, y: 0))
+        
+        shapeLayer.path = bezierPath.cgPath
+
+    }
     
     fileprivate func layoutViewPoints(minHeight: CGFloat, dragY: CGFloat, dragX: CGFloat) {
         let minX: CGFloat = 0.0
@@ -55,8 +82,10 @@ class SnapRefreshController: UIViewController {
         
         layoutViewPoints(minHeight: startingHeight, dragY: 100, dragX: view.frame.width/2)
         
+        generatePath()
+        
         shapeLayer.frame = CGRect(x: 0, y: 0, width: view.frame.width, height: startingHeight)
-        shapeLayer.backgroundColor = UIColor.darkGray.cgColor
+        shapeLayer.fillColor = UIColor.darkGray.cgColor
         view.layer.addSublayer(shapeLayer)
         
         view.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(self.userIsDragging)))
@@ -77,6 +106,7 @@ class SnapRefreshController: UIViewController {
             let dragX = gesture.location(in: view).x
             
             layoutViewPoints(minHeight: minimumHeight, dragY: dragY, dragX: dragX)
+            generatePath()
         }
     }
 }
