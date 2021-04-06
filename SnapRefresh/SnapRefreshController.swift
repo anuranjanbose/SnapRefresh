@@ -7,6 +7,15 @@
 
 import UIKit
 
+extension UIView {
+    func fetchCenter(animating: Bool) -> CGPoint {
+        if animating, let presentation = layer.presentation() {
+            return presentation.position
+        }
+        return center
+    }
+}
+
 class SnapRefreshController: UIViewController {
     
     fileprivate let startingHeight: CGFloat = 90.0
@@ -63,7 +72,7 @@ class SnapRefreshController: UIViewController {
     fileprivate func setUpViewPoints() {
         views.forEach { (layoutViewPoint) in
             layoutViewPoint.frame = CGRect(x: 0, y: 0, width: 4, height: 4)
-            layoutViewPoint.backgroundColor = .cyan
+            //layoutViewPoint.backgroundColor = .cyan
             view.addSubview(layoutViewPoint)
         }
         
@@ -75,13 +84,13 @@ class SnapRefreshController: UIViewController {
     @objc fileprivate func generatePath() {
         let screenWidth = UIScreen.main.bounds.width
         
-        let leftThreeCenter = leftThree.center
-        let leftTwoCenter = leftTwo.center
-        let leftOneCenter = leftOne.center
-        let centerZeroCenter = centerZero.center
-        let rightOneCenter = rightOne.center
-        let rightTwoCenter = rightTwo.center
-        let rightThreeCenter = rightThree.center
+        let leftThreeCenter = leftThree.fetchCenter(animating: animating)
+        let leftTwoCenter = leftTwo.fetchCenter(animating: animating)
+        let leftOneCenter = leftOne.fetchCenter(animating: animating)
+        let centerZeroCenter = centerZero.fetchCenter(animating: animating)
+        let rightOneCenter = rightOne.fetchCenter(animating: animating)
+        let rightTwoCenter = rightTwo.fetchCenter(animating: animating)
+        let rightThreeCenter = rightThree.fetchCenter(animating: animating)
         
         let bezierPath = UIBezierPath()
         
@@ -123,7 +132,7 @@ class SnapRefreshController: UIViewController {
         let gestureState = gesture.state
         if gestureState == .ended || gestureState == .failed || gestureState == .cancelled {
             animating = true
-            UIView.animate(withDuration: 05, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
+            UIView.animate(withDuration: 0.8, delay: 0, usingSpringWithDamping: 0.6, initialSpringVelocity: 1, options: .curveEaseIn, animations: {
                 self.views.forEach({ view in
                     view.center.y = self.startingHeight
                 })
